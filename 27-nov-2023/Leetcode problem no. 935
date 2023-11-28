@@ -1,0 +1,28 @@
+class Solution {
+    int m = 1000000007;
+    int[][] arr = {{4,6},{6,8},{7,9},{8,4},{3,9,0},{},{1,0,7},{2,6},{1,3},{4,2}};
+    public int knightDialer(int n) {
+
+        int[][] dp = new int[5001][10];
+        for(int cell = 0;cell<=9;cell++){
+            dp[0][cell] = 1;
+        }
+
+        for(int i = 1;i<n;i++){
+
+            for(int j = 0;j<10;j++){
+                int ans = 0;
+                for(int k:arr[j]){
+                    ans = (ans + dp[i-1][k]) % m;
+                }
+                dp[i][j] = ans;
+            }
+        }
+        int res = 0;
+        for(int i = 0 ;i<10;i++){
+            res = (res+dp[n-1][i])%m;
+        }
+        return res;
+    }
+   
+}
